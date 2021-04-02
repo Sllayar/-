@@ -17,34 +17,13 @@ namespace WpfApp1
                { 0,0,0,},
                { 0,0,0,},
                { 0,0,0,},
-
         };
 
 
         public void main(int x, int y)
-        {
-            int i = 0;
-            int u = 0;
-
-            for (i = 0; i<= matrix.GetUpperBound(0); i++)
-            {
-                for (u = 0; u <= matrix.GetUpperBound(1); u++)
-                {
-                    
-                }
-            }
-
-            
-            
-            if (matrix[x, y] != 0)
+        {          
+            if (IsGameEnd() || matrix[x, y] != 0)
                 return;
-
-
-
-
-            //не меняем х на у;
-            // определяем победителя
-            // поменяем 0 на у
 
             int newvalue = WhoGo();
             ChangePlayer();
@@ -66,9 +45,24 @@ namespace WpfApp1
             player2 = !player2;
            
         }
-        public void WhoWin()
+        public bool IsGameEnd()
         {
-           
+            for (int i = 0; i < 3; ++i)
+            {
+                if ((matrix[i, 0] == matrix[i, 1] && matrix[i, 1] == matrix[i, 2] && matrix[i, 0] != 0) ||
+                    matrix[0, i] == matrix[1, i] && matrix[1, i] == matrix[2, i] && matrix[0, i] != 0)
+                {
+                    return true;
+                }
+            }
+
+            if ((matrix[0, 0] == matrix[1, 1] && matrix[1, 1] == matrix[2, 2] && matrix[0, 0] != 0) ||
+                (matrix[0, 2] == matrix[1, 1] && matrix[1, 1] == matrix[2, 0] && matrix[0, 2] != 0))
+            {
+                return true;
+            }
+
+            return false;
         }
 
 
